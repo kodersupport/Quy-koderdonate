@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quỹ Koder Donate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0052cc;
+      --primary-hover: #0747a6;
+      --primary-light: #deebff;
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --text: #172b4d;
+      --text-secondary: #6b778c;
+      --border: #dfe1e6;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .music-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: #fafbfc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .music-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .music-btn.playing {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .slogan-box {
+      background: linear-gradient(135deg, #deebff 0%, #e6fcff 100%);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      text-align: center;
+      border: 1px solid #b3d4ff;
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .slogan-box.fade {
+      opacity: 0.4;
+    }
+
+    .slogan-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--primary);
+      line-height: 1.5;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      background: #fafbfc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #a5adba;
+    }
+
+    textarea {
+      height: auto;
+      min-height: 96px;
+      padding: 14px 16px;
+      resize: none;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      height: 40px;
+      background: #fafbfc;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .chip:hover {
+      border-color: #b3bac5;
+      color: var(--text);
+    }
+
+    .chip.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .name-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .name-row input {
+      flex: 1;
+    }
+
+    .btn-anon {
+      height: 48px;
+      padding: 0 18px;
+      background: #fafbfc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-anon:hover {
+      border-color: #b3bac5;
+    }
+
+    .btn-anon.active {
+      background: #ffebe6;
+      border-color: #ff5630;
+      color: #de350b;
+    }
+
+    .btn-primary {
+      width: 100%;
+      height: 52px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-family: inherit;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(0, 82, 204, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+
+    .result {
+      display: none;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .qr-card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .qr-card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .qr-card .sub {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .qr-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .qr-box img {
+      width: 200px;
+      height: 200px;
+      display: block;
+    }
+
+    .info-list {
+      text-align: left;
+      background: #fafbfc;
+      border-radius: 12px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .info-item + .info-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .info-label {
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .info-value {
+      font-weight: 500;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .info-value.amount {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .scan-hint {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .bottom-slogans {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .bottom-slogans p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .bottom-slogans p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Quỹ <span>Koder Donate</span></div>
+      <button class="music-btn" id="musicBtn" title="Bật / tắt nhạc nền" onclick="toggleMusic()">♪</button>
+    </div>
+  </div>
+
+  <!-- Nhạc nền (đặt file mp3 cùng thư mục với file html) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="snaptik.vn_7647863743342234901.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="main">
+    <div class="hero">
+      <h1>Quỹ Koder Donate</h1>
+      <p>Mỗi đóng góp là một bước tiến</p>
+    </div>
+
+    <div class="slogan-box" id="sloganBox">
+      <div class="slogan-text" id="sloganText">Mỗi dòng code đều bắt đầu từ một trái tim sẵn sàng sẻ chia.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Thông tin giao dịch</div>
+
+      <div class="field">
+        <label for="amount">Số tiền ủng hộ (VNĐ)</label>
+        <input type="number" id="amount" placeholder="Nhập số tiền" min="1000" step="1000" inputmode="numeric" />
+        <div class="chips">
+          <button type="button" class="chip" data-v="10000">10.000</button>
+          <button type="button" class="chip" data-v="20000">20.000</button>
+          <button type="button" class="chip" data-v="50000">50.000</button>
+          <button type="button" class="chip" data-v="100000">100.000</button>
+          <button type="button" class="chip" data-v="200000">200.000</button>
+          <button type="button" class="chip" data-v="500000">500.000</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="name">Tên người gửi</label>
+        <div class="name-row">
+          <input type="text" id="name" placeholder="Họ và tên" />
+          <button type="button" class="btn-anon" id="anonBtn">Ẩn danh</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="content">Nội dung</label>
+        <textarea id="content" placeholder="Lời nhắn gửi kèm (không bắt buộc)"></textarea>
+      </div>
+
+      <button class="btn-primary" onclick="createQR()">Tạo mã QR chuyển khoản</button>
+    </div>
+
+    <div class="result" id="result">
+      <div class="qr-card">
+        <h2>Mã QR thanh toán</h2>
+        <p class="sub">Quét mã bằng ZaloPay hoặc ứng dụng ngân hàng</p>
+
+        <div class="qr-box">
+          <img id="qrImg" alt="Mã QR" />
+        </div>
+
+        <div class="info-list" id="infoList"></div>
+
+        <p class="scan-hint">
+          Số tiền và nội dung sẽ được điền tự động khi quét mã.<br>
+          Vui lòng kiểm tra thông tin trước khi xác nhận.
+        </p>
+      </div>
+    </div>
+
+    <div class="bottom-slogans">
+      <p><strong>Chia sẻ · Ủng hộ · Cùng phát triển</strong></p>
+      <p>Cảm ơn bạn đã đồng hành cùng cộng đồng Koder</p>
+    </div>
+  </div>
+
+  <script>
+    const BIN = '970454';
+    const ACC = '99ZP26154M42407211';
+
+    // Slogan tiếng Việt hay, ngắn gọn
+    const slogans = [
+      "Mỗi dòng code đều bắt đầu từ một trái tim sẵn sàng sẻ chia.",
+      "Ủng hộ hôm nay — tiếp thêm sức mạnh cho ngày mai.",
+      "Không cần nhiều, chỉ cần chân thành là đủ.",
+      "Cộng đồng mạnh khi mọi người cùng nâng đỡ lẫn nhau.",
+      "Một chút đóng góp, cả một hành trình dài.",
+      "Code hay hơn khi có người tin tưởng và ủng hộ.",
+      "Bạn không chỉ cho đi tiền — bạn đang nuôi dưỡng ước mơ.",
+      "Cùng nhau xây dựng, cùng nhau tiến về phía trước.",
+      "Sự ủng hộ nhỏ bé hôm nay là nền tảng của những điều lớn lao.",
+      "Koder sống bằng đam mê, phát triển nhờ sự sẻ chia."
+    ];
+
+    let sloganIndex = 0;
+    const sloganEl = document.getElementById('sloganText');
+    const sloganBox = document.getElementById('sloganBox');
+
+    function rotateSlogan() {
+      sloganBox.classList.add('fade');
+      setTimeout(() => {
+        sloganIndex = (sloganIndex + 1) % slogans.length;
+        sloganEl.textContent = slogans[sloganIndex];
+        sloganBox.classList.remove('fade');
+      }, 280);
+    }
+
+    // Chuyển slogan mỗi 2 giây
+    setInterval(rotateSlogan, 2000);
+
+    // Nhạc nền
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        musicBtn.classList.remove('playing');
+        musicBtn.textContent = '♪';
+      } else {
+        audio.play().catch(() => {});
+        musicBtn.classList.add('playing');
+        musicBtn.textContent = '❚❚';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Tự phát khi người dùng tương tác lần đầu (tránh bị chặn autoplay)
+    document.body.addEventListener('click', function once() {
+      if (!isPlaying) {
+        audio.volume = 0.45;
+        audio.play().then(() => {
+          isPlaying = true;
+          musicBtn.classList.add('playing');
+          musicBtn.textContent = '❚❚';
+        }).catch(() => {});
+      }
+      document.body.removeEventListener('click', once);
+    }, { once: true });
+
+    let isAnon = false;
+
+    document.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('amount').value = btn.dataset.v;
+      });
+    });
+
+    document.getElementById('anonBtn').addEventListener('click', function () {
+      isAnon = !isAnon;
+      const input = document.getElementById('name');
+      if (isAnon) {
+        this.classList.add('active');
+        this.textContent = 'Đã ẩn danh';
+        input.value = 'Ẩn danh';
+        input.disabled = true;
+      } else {
+        this.classList.remove('active');
+        this.textContent = 'Ẩn danh';
+        input.value = '';
+        input.disabled = false;
+        input.focus();
+      }
+    });
+
+    function formatMoney(n) {
+      return new Intl.NumberFormat('vi-VN').format(n) + ' ₫';
+    }
+
+    function crc16(str) {
+      let crc = 0xffff;
+      for (let i = 0; i < str.length; i++) {
+        crc ^= str.charCodeAt(i) << 8;
+        for (let j = 0; j < 8; j++) {
+          crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+          crc &= 0xffff;
+        }
+      }
+      return crc.toString(16).toUpperCase().padStart(4, '0');
+    }
+
+    function tlv(id, value) {
+      return id + String(value.length).padStart(2, '0') + value;
+    }
+
+    function buildVietQR(amount, purpose) {
+      const merchantInfo = tlv('38',
+        tlv('00', 'A000000727') +
+        tlv('01', tlv('00', BIN) + tlv('01', ACC)) +
+        tlv('02', 'QRIBFTTA')
+      );
+
+      let payload = '';
+      payload += tlv('00', '01');
+      payload += tlv('01', '12');
+      payload += merchantInfo;
+      payload += tlv('53', '704');
+      payload += tlv('54', String(amount));
+      payload += tlv('58', 'VN');
+
+      if (purpose) {
+        payload += tlv('62', tlv('08', purpose.substring(0, 25)));
+      }
+
+      payload += '6304';
+      return payload + crc16(payload);
+    }
+
+    function createQR() {
+      const amount = document.getElementById('amount').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      if (!amount || Number(amount) < 1000) {
+        alert('Vui lòng nhập số tiền từ 1.000 ₫ trở lên');
+        return;
+      }
+
+      let purpose = '';
+      if (name && name !== 'Ẩn danh') {
+        purpose = name;
+        if (content) purpose += ' • ' + content;
+      } else if (content) {
+        purpose = content;
+      } else {
+        purpose = 'Koder Donate';
+      }
+
+      const cleanPurpose = purpose
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .substring(0, 40);
+
+      const payload = buildVietQR(amount, cleanPurpose);
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}&margin=4&ecc=M`;
+
+      document.getElementById('qrImg').src = qrUrl;
+
+      document.getElementById('infoList').innerHTML = `
+        <div class="info-item">
+          <span class="info-label">Số tiền</span>
+          <span class="info-value amount">${formatMoney(amount)}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Người gửi</span>
+          <span class="info-value">${name || 'Ẩn danh'}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Nội dung</span>
+          <span class="info-value">${purpose}</span>
+        </div>
+      `;
+
+      const resultEl = document.getElementById('result');
+      resultEl.classList.add('show');
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('amount').addEventListener('keydown', e => {
+      if (e.key === 'Enter') createQR();
+    });
+  </script>
+</body>
+</html>
