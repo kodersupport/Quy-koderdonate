@@ -414,12 +414,12 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand">Quỹ <span>Koder Donate</span></div>
-      <button class="music-btn" id="musicBtn" title="Bật / tắt nhạc nền" onclick="toggleMusic()">♪</button>
+      <button class="music-btn playing" id="musicBtn" title="Bật / tắt nhạc nền" onclick="toggleMusic()">❚❚</button>
     </div>
   </div>
 
   <!-- Nhạc nền (đặt file mp3 cùng thư mục với file html) -->
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop preload="auto" autoplay>
     <source src="snaptik.vn_7647863743342234901.mp3" type="audio/mpeg">
   </audio>
 
@@ -523,36 +523,59 @@
     // Chuyển slogan mỗi 2 giây
     setInterval(rotateSlogan, 2000);
 
-    // Nhạc nền
+    // Nhạc nền - mặc định BẬT
     const audio = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
-    let isPlaying = false;
+    let isPlaying = true;
+
+    audio.volume = 0.45;
+
+    // Thử phát ngay khi load
+    function tryPlay() {
+      audio.play().then(() => {
+        isPlaying = true;
+        musicBtn.classList.add('playing');
+        musicBtn.textContent = '❚❚';
+      }).catch(() => {
+        // Nếu bị chặn autoplay → chờ tương tác đầu tiên
+        isPlaying = false;
+        musicBtn.classList.remove('playing');
+        musicBtn.textContent = '♪';
+        const unlock = () => {
+          audio.play().then(() => {
+            isPlaying = true;
+            musicBtn.classList.add('playing');
+            musicBtn.textContent = '❚❚';
+          }).catch(() => {});
+          document.body.removeEventListener('click', unlock);
+          document.body.removeEventListener('touchstart', unlock);
+        };
+        document.body.addEventListener('click', unlock, { once: true });
+        document.body.addEventListener('touchstart', unlock, { once: true });
+      });
+    }
+
+    // Gọi ngay
+    if (document.readyState === 'complete') {
+      tryPlay();
+    } else {
+      window.addEventListener('load', tryPlay);
+    }
 
     function toggleMusic() {
       if (isPlaying) {
         audio.pause();
         musicBtn.classList.remove('playing');
         musicBtn.textContent = '♪';
+        isPlaying = false;
       } else {
-        audio.play().catch(() => {});
-        musicBtn.classList.add('playing');
-        musicBtn.textContent = '❚❚';
-      }
-      isPlaying = !isPlaying;
-    }
-
-    // Tự phát khi người dùng tương tác lần đầu (tránh bị chặn autoplay)
-    document.body.addEventListener('click', function once() {
-      if (!isPlaying) {
-        audio.volume = 0.45;
         audio.play().then(() => {
-          isPlaying = true;
           musicBtn.classList.add('playing');
           musicBtn.textContent = '❚❚';
+          isPlaying = true;
         }).catch(() => {});
       }
-      document.body.removeEventListener('click', once);
-    }, { once: true });
+    }
 
     let isAnon = false;
 
