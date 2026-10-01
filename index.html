@@ -6,41 +6,160 @@
   <title>Quỹ Koder Donate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0052cc;
-      --primary-hover: #0747a6;
-      --primary-light: #deebff;
-      --bg: #f4f5f7;
-      --surface: #ffffff;
-      --text: #172b4d;
-      --text-secondary: #6b778c;
-      --border: #dfe1e6;
-      --radius: 12px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-      --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+      --bg: #0f172a;
+      --bg-2: #1e293b;
+      --surface: #1e293b;
+      --surface-2: #334155;
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --accent: #a78bfa;
+      --accent-soft: rgba(167, 139, 250, 0.12);
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --muted: #64748b;
+      --border: #334155;
+      --success: #34d399;
+      --radius: 14px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      line-height: 1.5;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Neon LED background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 55% at 15% -5%, rgba(14, 165, 233, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 90% 105%, rgba(139, 92, 246, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 50% 45%, rgba(52, 211, 153, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 70% 20%, rgba(244, 114, 182, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: bgPulse 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+
+    /* Animated neon light streaks */
+    .streak {
+      position: fixed;
+      height: 2px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 0;
+      animation: streak-move linear infinite;
+      filter: blur(0.5px);
+      box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+    }
+    .streak.s1 {
+      top: 15%; width: 35%; left: -40%;
+      background: linear-gradient(90deg, transparent, #38bdf8, #7dd3fc, transparent);
+      color: #38bdf8;
+      animation-duration: 6.5s; animation-delay: 0s; opacity: 0.7;
+    }
+    .streak.s2 {
+      top: 38%; width: 50%; left: -55%;
+      background: linear-gradient(90deg, transparent, #a78bfa, #c4b5fd, transparent);
+      color: #a78bfa;
+      animation-duration: 9s; animation-delay: -2.5s; opacity: 0.55;
+    }
+    .streak.s3 {
+      top: 62%; width: 30%; left: -35%;
+      background: linear-gradient(90deg, transparent, #22d3ee, #67e8f9, transparent);
+      color: #22d3ee;
+      animation-duration: 7.5s; animation-delay: -4s; opacity: 0.6;
+    }
+    .streak.s4 {
+      top: 82%; width: 42%; left: -45%;
+      background: linear-gradient(90deg, transparent, #34d399, #6ee7b7, transparent);
+      color: #34d399;
+      animation-duration: 11s; animation-delay: -1s; opacity: 0.45;
+    }
+    .streak.s5 {
+      top: 28%; width: 25%; left: -30%;
+      background: linear-gradient(90deg, transparent, #f472b6, #f9a8d4, transparent);
+      color: #f472b6;
+      animation-duration: 8.5s; animation-delay: -6s; opacity: 0.45;
+      height: 1.5px;
+    }
+    .streak.s6 {
+      top: 8%; width: 28%; left: -35%;
+      background: linear-gradient(90deg, transparent, #67e8f9, #38bdf8, transparent);
+      color: #67e8f9;
+      animation-duration: 5.5s; animation-delay: -1.5s; opacity: 0.55;
+      height: 2px;
+    }
+    .streak.s7 {
+      top: 48%; width: 38%; left: -42%;
+      background: linear-gradient(90deg, transparent, #c4b5fd, #a78bfa, transparent);
+      color: #c4b5fd;
+      animation-duration: 10s; animation-delay: -7s; opacity: 0.4;
+      height: 1.5px;
+    }
+    .streak.s8 {
+      top: 72%; width: 32%; left: -38%;
+      background: linear-gradient(90deg, transparent, #2dd4bf, #14b8a6, transparent);
+      color: #2dd4bf;
+      animation-duration: 7s; animation-delay: -3.5s; opacity: 0.5;
+      height: 2px;
+    }
+    .streak.s9 {
+      top: 92%; width: 22%; left: -28%;
+      background: linear-gradient(90deg, transparent, #fbbf24, #f59e0b, transparent);
+      color: #fbbf24;
+      animation-duration: 9.5s; animation-delay: -5s; opacity: 0.35;
+      height: 1.5px;
+    }
+    .streak.s10 {
+      top: 22%; width: 45%; left: -50%;
+      background: linear-gradient(90deg, transparent, #818cf8, #6366f1, transparent);
+      color: #818cf8;
+      animation-duration: 13s; animation-delay: -8s; opacity: 0.3;
+      height: 1px;
+    }
+
+    @keyframes streak-move {
+      0% { transform: translateX(0); opacity: 0; }
+      8% { opacity: 0.7; }
+      92% { opacity: 0.5; }
+      100% { transform: translateX(calc(100vw + 120%)); opacity: 0; }
+    }
+
+    /* Soft grid neon */
+    .neon-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 15%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 15%, transparent 72%);
+    }
+
     .topbar {
-      background: var(--surface);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 0 20px;
       height: 64px;
       display: flex;
       align-items: center;
@@ -53,123 +172,176 @@
     .topbar-inner {
       width: 100%;
       max-width: 480px;
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .brand {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: -0.02em;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .brand span {
-      color: var(--text);
       font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      -webkit-text-fill-color: var(--muted);
+      margin-left: 8px;
     }
 
     .music-btn {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: 1.5px solid var(--border);
-      background: #fafbfc;
+      border: 1px solid var(--border);
+      background: var(--surface);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
       color: var(--text-secondary);
       font-size: 0.9rem;
+      transition: all 0.2s;
     }
-
-    .music-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
+    .music-btn:hover,
     .music-btn.playing {
-      background: var(--primary-light);
       border-color: var(--primary);
       color: var(--primary);
+      background: var(--primary-soft);
     }
 
     .main {
+      position: relative;
+      z-index: 1;
       max-width: 480px;
       margin: 0 auto;
-      padding: 28px 16px 48px;
+      padding: 36px 18px 56px;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
     }
 
     .hero h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .hero p {
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      max-width: 340px;
+      margin: 0 auto;
     }
 
-    .slogan-box {
-      background: linear-gradient(135deg, #deebff 0%, #e6fcff 100%);
-      border-radius: 14px;
-      padding: 16px 18px;
+    /* Quote - fixed height, crossfade, no overlap */
+    .quote-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px 16px 22px;
       margin-bottom: 24px;
-      text-align: center;
-      border: 1px solid #b3d4ff;
-      min-height: 72px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition: opacity 0.3s ease;
+      height: 80px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .slogan-box.fade {
-      opacity: 0.4;
+    .quote-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #38bdf8, #a78bfa);
+      border-radius: 3px 0 0 3px;
+      z-index: 2;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.65), 0 0 28px rgba(167, 139, 250, 0.25);
     }
 
-    .slogan-text {
-      font-size: 0.95rem;
+    .quote-text {
+      position: absolute;
+      left: 22px;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
       font-weight: 500;
-      color: var(--primary);
+      color: var(--text-secondary);
       line-height: 1.5;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 0.65s ease;
+      pointer-events: none;
+      will-change: opacity;
     }
 
+    .quote-text.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* Card */
     .card {
       background: var(--surface);
-      border-radius: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 22px;
+      margin-bottom: 22px;
       box-shadow: var(--shadow);
-      padding: 28px 24px;
-      margin-bottom: 20px;
     }
 
-    .card-title {
+    .card-header {
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card-header p {
       font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 20px;
+      color: var(--muted);
+      margin-top: 3px;
     }
 
-    .field {
-      margin-bottom: 20px;
-    }
+    .field { margin-bottom: 20px; }
 
     label {
       display: block;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
       margin-bottom: 8px;
     }
 
@@ -178,33 +350,30 @@
     textarea {
       width: 100%;
       height: 48px;
-      padding: 0 16px;
-      background: #fafbfc;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 1rem;
+      padding: 0 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.95rem;
       font-family: inherit;
       color: var(--text);
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     input:focus,
     textarea:focus {
       border-color: var(--primary);
-      background: #fff;
-      box-shadow: 0 0 0 3px var(--primary-light);
+      box-shadow: 0 0 0 3px var(--primary-soft);
     }
 
     input::placeholder,
-    textarea::placeholder {
-      color: #a5adba;
-    }
+    textarea::placeholder { color: var(--muted); }
 
     textarea {
       height: auto;
-      min-height: 96px;
-      padding: 14px 16px;
+      min-height: 88px;
+      padding: 12px 14px;
       resize: none;
     }
 
@@ -212,117 +381,109 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     .chip {
       height: 40px;
-      background: #fafbfc;
-      border: 1.5px solid var(--border);
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all 0.15s;
       font-family: inherit;
     }
-
     .chip:hover {
-      border-color: #b3bac5;
-      color: var(--text);
-    }
-
-    .chip.active {
-      background: var(--primary-light);
       border-color: var(--primary);
       color: var(--primary);
-      font-weight: 600;
+    }
+    .chip.active {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
-    .name-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .name-row input {
-      flex: 1;
-    }
+    .name-row { display: flex; gap: 10px; }
+    .name-row input { flex: 1; }
 
     .btn-anon {
       height: 48px;
-      padding: 0 18px;
-      background: #fafbfc;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 0.875rem;
-      font-weight: 500;
+      padding: 0 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.15s;
       font-family: inherit;
     }
-
-    .btn-anon:hover {
-      border-color: #b3bac5;
-    }
-
+    .btn-anon:hover { border-color: var(--text-secondary); color: var(--text); }
     .btn-anon.active {
-      background: #ffebe6;
-      border-color: #ff5630;
-      color: #de350b;
+      background: rgba(248, 113, 113, 0.12);
+      border-color: #f87171;
+      color: #f87171;
     }
 
     .btn-primary {
       width: 100%;
       height: 52px;
-      background: var(--primary);
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
       color: #fff;
       border: none;
-      border-radius: var(--radius);
+      border-radius: 14px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
       font-family: inherit;
-      margin-top: 8px;
-      box-shadow: 0 2px 8px rgba(0, 82, 204, 0.25);
+      margin-top: 6px;
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.3);
+      letter-spacing: -0.01em;
     }
-
     .btn-primary:hover {
-      background: var(--primary-hover);
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(14, 165, 233, 0.4);
     }
+    .btn-primary:active { transform: scale(0.985); }
 
-    .btn-primary:active {
-      transform: scale(0.99);
-    }
-
-    .result {
-      display: none;
-      animation: fadeUp 0.4s ease;
-    }
-
-    .result.show {
-      display: block;
-    }
+    /* Result */
+    .result { display: none; animation: fadeUp 0.4s ease; }
+    .result.show { display: block; }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .qr-card {
       background: var(--surface);
-      border-radius: 16px;
-      box-shadow: var(--shadow-lg);
-      padding: 32px 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 22px;
       text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .qr-card .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
     }
 
     .qr-card h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       margin-bottom: 6px;
     }
 
@@ -334,11 +495,11 @@
 
     .qr-box {
       background: #fff;
-      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 16px;
       display: inline-block;
       margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
 
     .qr-box img {
@@ -349,9 +510,9 @@
 
     .info-list {
       text-align: left;
-      background: #fafbfc;
+      background: var(--bg);
       border-radius: 12px;
-      padding: 16px 18px;
+      padding: 14px 16px;
       border: 1px solid var(--border);
     }
 
@@ -359,85 +520,108 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 16px;
+      gap: 12px;
       padding: 8px 0;
       font-size: 0.9rem;
     }
+    .info-item + .info-item { border-top: 1px solid var(--border); }
 
-    .info-item + .info-item {
-      border-top: 1px solid var(--border);
-    }
-
-    .info-label {
-      color: var(--text-secondary);
-      flex-shrink: 0;
-    }
-
-    .info-value {
-      font-weight: 500;
-      text-align: right;
-      word-break: break-word;
-    }
-
-    .info-value.amount {
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
+    .info-label { color: var(--muted); font-weight: 500; flex-shrink: 0; }
+    .info-value { font-weight: 600; text-align: right; word-break: break-word; }
+    .info-value.amount { color: var(--primary); font-size: 1.05rem; }
 
     .scan-hint {
       margin-top: 20px;
       font-size: 0.8rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      color: var(--muted);
+      line-height: 1.55;
     }
 
-    .bottom-slogans {
-      margin-top: 32px;
+    .footer {
+      margin-top: 36px;
       text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
     }
-
-    .bottom-slogans p {
-      font-size: 0.85rem;
+    .footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .footer strong {
       color: var(--text-secondary);
-      margin-bottom: 4px;
-      line-height: 1.5;
+      font-weight: 600;
     }
 
-    .bottom-slogans p strong {
-      color: var(--text);
-      font-weight: 500;
+    /* Particles */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    .ripple {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.25);
+      transform: scale(0);
+      animation: ripple-anim 0.6s ease-out forwards;
+      pointer-events: none;
+      z-index: 9998;
+    }
+    @keyframes ripple-anim {
+      to { transform: scale(4); opacity: 0; }
     }
   </style>
 </head>
 <body>
+  <div class="neon-grid"></div>
+  <div class="streak s1"></div>
+  <div class="streak s2"></div>
+  <div class="streak s3"></div>
+  <div class="streak s4"></div>
+  <div class="streak s5"></div>
+  <div class="streak s6"></div>
+  <div class="streak s7"></div>
+  <div class="streak s8"></div>
+  <div class="streak s9"></div>
+  <div class="streak s10"></div>
+
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand">Quỹ <span>Koder Donate</span></div>
+      <div class="brand">Koder <span>Donate</span></div>
       <button class="music-btn playing" id="musicBtn" title="Bật / tắt nhạc nền" onclick="toggleMusic()">❚❚</button>
     </div>
   </div>
 
-  <!-- Nhạc nền (đặt file mp3 cùng thư mục với file html) -->
   <audio id="bgMusic" loop preload="auto" autoplay>
     <source src="snaptik.vn_7647863743342234901.mp3" type="audio/mpeg">
   </audio>
 
   <div class="main">
     <div class="hero">
+      <div class="hero-label">Quỹ hỗ trợ phát triển</div>
       <h1>Quỹ Koder Donate</h1>
-      <p>Mỗi đóng góp là một bước tiến</p>
+      <p>Đóng góp của bạn góp phần duy trì và phát triển các dự án công nghệ.</p>
     </div>
 
-    <div class="slogan-box" id="sloganBox">
-      <div class="slogan-text" id="sloganText">Mỗi dòng code đều bắt đầu từ một trái tim sẵn sàng sẻ chia.</div>
+    <div class="quote-box">
+      <!-- filled by JS for smooth crossfade -->
     </div>
 
     <div class="card">
-      <div class="card-title">Thông tin giao dịch</div>
+      <div class="card-header">
+        <h2>Thông tin đóng góp</h2>
+        <p>Điền thông tin để tạo mã thanh toán</p>
+      </div>
 
       <div class="field">
-        <label for="amount">Số tiền ủng hộ (VNĐ)</label>
+        <label for="amount">Số tiền đóng góp (VNĐ)</label>
         <input type="number" id="amount" placeholder="Nhập số tiền" min="1000" step="1000" inputmode="numeric" />
         <div class="chips">
           <button type="button" class="chip" data-v="10000">10.000</button>
@@ -450,28 +634,29 @@
       </div>
 
       <div class="field">
-        <label for="name">Tên người gửi</label>
+        <label for="name">Họ và tên người đóng góp</label>
         <div class="name-row">
-          <input type="text" id="name" placeholder="Họ và tên" />
+          <input type="text" id="name" placeholder="Nhập họ và tên" />
           <button type="button" class="btn-anon" id="anonBtn">Ẩn danh</button>
         </div>
       </div>
 
       <div class="field">
-        <label for="content">Nội dung</label>
-        <textarea id="content" placeholder="Lời nhắn gửi kèm (không bắt buộc)"></textarea>
+        <label for="content">Nội dung chuyển khoản</label>
+        <textarea id="content" placeholder="Ghi chú kèm theo (không bắt buộc)"></textarea>
       </div>
 
-      <button class="btn-primary" onclick="createQR()">Tạo mã QR chuyển khoản</button>
+      <button class="btn-primary" onclick="createQR()">Tạo mã QR thanh toán</button>
     </div>
 
     <div class="result" id="result">
       <div class="qr-card">
-        <h2>Mã QR thanh toán</h2>
-        <p class="sub">Quét mã bằng ZaloPay hoặc ứng dụng ngân hàng</p>
+        <div class="label">Thanh toán</div>
+        <h2>Mã QR chuyển khoản</h2>
+        <p class="sub">Quét bằng ZaloPay hoặc ứng dụng ngân hàng</p>
 
         <div class="qr-box">
-          <img id="qrImg" alt="Mã QR" />
+          <img id="qrImg" alt="Mã QR thanh toán" />
         </div>
 
         <div class="info-list" id="infoList"></div>
@@ -483,61 +668,93 @@
       </div>
     </div>
 
-    <div class="bottom-slogans">
-      <p><strong>Chia sẻ · Ủng hộ · Cùng phát triển</strong></p>
-      <p>Cảm ơn bạn đã đồng hành cùng cộng đồng Koder</p>
+    <div class="footer">
+      <p><strong>Quỹ Koder Donate</strong></p>
+      <p>Hỗ trợ cộng đồng phát triển công nghệ</p>
     </div>
   </div>
 
   <script>
-    const BIN = '970454';
-    const ACC = '99ZP26154M42407211';
-
-    // Slogan tiếng Việt hay, ngắn gọn
     const slogans = [
-      "Mỗi dòng code đều bắt đầu từ một trái tim sẵn sàng sẻ chia.",
-      "Ủng hộ hôm nay — tiếp thêm sức mạnh cho ngày mai.",
-      "Không cần nhiều, chỉ cần chân thành là đủ.",
-      "Cộng đồng mạnh khi mọi người cùng nâng đỡ lẫn nhau.",
-      "Một chút đóng góp, cả một hành trình dài.",
-      "Code hay hơn khi có người tin tưởng và ủng hộ.",
-      "Bạn không chỉ cho đi tiền — bạn đang nuôi dưỡng ước mơ.",
-      "Cùng nhau xây dựng, cùng nhau tiến về phía trước.",
-      "Sự ủng hộ nhỏ bé hôm nay là nền tảng của những điều lớn lao.",
-      "Koder sống bằng đam mê, phát triển nhờ sự sẻ chia."
+      "Mỗi sự đóng góp đều là nền tảng cho những giá trị bền vững.",
+      "Đầu tư vào tri thức là đầu tư vào tương lai chung.",
+      "Cộng đồng vững mạnh bắt nguồn từ sự sẻ chia chân thành.",
+      "Những đóng góp nhỏ hôm nay kiến tạo thành tựu lớn ngày mai.",
+      "Phát triển bền vững nhờ sự đồng hành của cộng đồng.",
+      "Mỗi khoản đóng góp là một lời cam kết cho sự tiến bộ.",
+      "Công nghệ chỉ thực sự ý nghĩa khi được sẻ chia.",
+      "Sự ủng hộ của bạn giúp duy trì động lực sáng tạo."
     ];
 
     let sloganIndex = 0;
-    const sloganEl = document.getElementById('sloganText');
-    const sloganBox = document.getElementById('sloganBox');
+    const quoteBox = document.querySelector('.quote-box');
+    // Tạo 2 lớp text để crossfade mượt, không đè chữ
+    quoteBox.innerHTML = `
+      <div class="quote-text active" id="sloganA">${slogans[0]}</div>
+      <div class="quote-text" id="sloganB"></div>
+    `;
+    let showingA = true;
 
     function rotateSlogan() {
-      sloganBox.classList.add('fade');
-      setTimeout(() => {
-        sloganIndex = (sloganIndex + 1) % slogans.length;
-        sloganEl.textContent = slogans[sloganIndex];
-        sloganBox.classList.remove('fade');
-      }, 280);
+      const current = document.getElementById(showingA ? 'sloganA' : 'sloganB');
+      const next = document.getElementById(showingA ? 'sloganB' : 'sloganA');
+      // Set text first (invisible), then crossfade
+      sloganIndex = (sloganIndex + 1) % slogans.length;
+      next.textContent = slogans[sloganIndex];
+      // Force reflow then activate
+      void next.offsetWidth;
+      current.classList.remove('active');
+      next.classList.add('active');
+      showingA = !showingA;
     }
+    setInterval(rotateSlogan, 3500);
 
-    // Chuyển slogan mỗi 2 giây
-    setInterval(rotateSlogan, 2000);
+    // Particles
+    const colors = ['#38bdf8', '#a78bfa', '#34d399', '#f472b6', '#fbbf24'];
+    function createParticles(x, y, count = 10) {
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 3 + Math.random() * 7;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
+        p.style.top = (y + (Math.random() - 0.5) * 20) + 'px';
+        p.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+        p.style.animationDelay = (Math.random() * 0.3) + 's';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 4000);
+      }
+    }
+    function createRipple(x, y) {
+      const r = document.createElement('div');
+      r.className = 'ripple';
+      r.style.width = '40px';
+      r.style.height = '40px';
+      r.style.left = (x - 20) + 'px';
+      r.style.top = (y - 20) + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 650);
+    }
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.music-btn')) return;
+      createRipple(e.clientX, e.clientY);
+      createParticles(e.clientX, e.clientY, 9 + Math.floor(Math.random() * 6));
+    });
 
-    // Nhạc nền - mặc định BẬT
+    // Music default ON
     const audio = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
     let isPlaying = true;
+    audio.volume = 0.42;
 
-    audio.volume = 0.45;
-
-    // Thử phát ngay khi load
     function tryPlay() {
       audio.play().then(() => {
         isPlaying = true;
         musicBtn.classList.add('playing');
         musicBtn.textContent = '❚❚';
       }).catch(() => {
-        // Nếu bị chặn autoplay → chờ tương tác đầu tiên
         isPlaying = false;
         musicBtn.classList.remove('playing');
         musicBtn.textContent = '♪';
@@ -554,13 +771,8 @@
         document.body.addEventListener('touchstart', unlock, { once: true });
       });
     }
-
-    // Gọi ngay
-    if (document.readyState === 'complete') {
-      tryPlay();
-    } else {
-      window.addEventListener('load', tryPlay);
-    }
+    if (document.readyState === 'complete') tryPlay();
+    else window.addEventListener('load', tryPlay);
 
     function toggleMusic() {
       if (isPlaying) {
@@ -577,8 +789,8 @@
       }
     }
 
+    // Form
     let isAnon = false;
-
     document.querySelectorAll('.chip').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
@@ -608,45 +820,6 @@
       return new Intl.NumberFormat('vi-VN').format(n) + ' ₫';
     }
 
-    function crc16(str) {
-      let crc = 0xffff;
-      for (let i = 0; i < str.length; i++) {
-        crc ^= str.charCodeAt(i) << 8;
-        for (let j = 0; j < 8; j++) {
-          crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
-          crc &= 0xffff;
-        }
-      }
-      return crc.toString(16).toUpperCase().padStart(4, '0');
-    }
-
-    function tlv(id, value) {
-      return id + String(value.length).padStart(2, '0') + value;
-    }
-
-    function buildVietQR(amount, purpose) {
-      const merchantInfo = tlv('38',
-        tlv('00', 'A000000727') +
-        tlv('01', tlv('00', BIN) + tlv('01', ACC)) +
-        tlv('02', 'QRIBFTTA')
-      );
-
-      let payload = '';
-      payload += tlv('00', '01');
-      payload += tlv('01', '12');
-      payload += merchantInfo;
-      payload += tlv('53', '704');
-      payload += tlv('54', String(amount));
-      payload += tlv('58', 'VN');
-
-      if (purpose) {
-        payload += tlv('62', tlv('08', purpose.substring(0, 25)));
-      }
-
-      payload += '6304';
-      return payload + crc16(payload);
-    }
-
     function createQR() {
       const amount = document.getElementById('amount').value.trim();
       const name = document.getElementById('name').value.trim();
@@ -670,10 +843,12 @@
       const cleanPurpose = purpose
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .substring(0, 40);
+        .substring(0, 50);
 
-      const payload = buildVietQR(amount, cleanPurpose);
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}&margin=4&ecc=M`;
+      const qrUrl = `https://img.vietqr.io/image/970454-99ZP26154M42407211-qr_only.png` +
+        `?amount=${encodeURIComponent(amount)}` +
+        `&addInfo=${encodeURIComponent(cleanPurpose)}` +
+        `&accountName=${encodeURIComponent('PHAM THI HUE')}`;
 
       document.getElementById('qrImg').src = qrUrl;
 
@@ -683,7 +858,7 @@
           <span class="info-value amount">${formatMoney(amount)}</span>
         </div>
         <div class="info-item">
-          <span class="info-label">Người gửi</span>
+          <span class="info-label">Người đóng góp</span>
           <span class="info-value">${name || 'Ẩn danh'}</span>
         </div>
         <div class="info-item">
